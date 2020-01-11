@@ -1,0 +1,40 @@
+p {
+  font-family: Open Sans;
+}
+
+h1 {
+  font-family: Arial, Helvetica, sans-serif
+}
+
+input {
+  border: 3px solid #55555500;
+  transition: all 0.2s;
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 5px;
+}
+
+
+input[type=text]:focus {
+  border: 3px solid #55555599;
+}
+
+.centeredcol {
+  width: 50%;
+  margin: 15% auto;
+  background-color: #ffffff88;
+  padding: 1em;
+  border-radius: 5px;
+}
+
+.candidate {
+  background-color: #ffffffbb;
+  padding: 1em;
+  border-radius: 5px;
+  margin-bottom: 1em;
+}
+
+body {
+  background: url("background.png") no-repeat center center fixed;
+  background-size: cover;
+}

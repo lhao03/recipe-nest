@@ -1,0 +1,17 @@
+h2 {
+  font-family: Open Sans;
+  font-weight: bolder;
+}
+
+#container {
+  width: 25%;
+  margin: 25% auto;
+  background-color: #ffffff88;
+  padding: 1em;
+  border-radius: 5px;
+}
+
+body {
+  background: url("background.png") no-repeat center center fixed;
+  background-size: cover;
+}
