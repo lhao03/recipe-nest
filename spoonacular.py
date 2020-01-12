@@ -6,26 +6,10 @@ import requests
 
 
 class Spoonacular:
-    API_URL = "https://api.spoonacular.com/recipes/complexSearch?number=1&instructionsRequired=true&fillIngredients=true&"
+    API_URL = "https://api.spoonacular.com/recipes/complexSearch?number=1&instructionsRequired=true&fillIngredients=true&addRecipeInformation=true&"
     API_KEY = "apiKey=40770178730f426c894749c027909c7a"
     API_URL_IMAGES = "https://api.spoonacular.com/recipes/"
     IMAGE_CONT = "/ingredientWidget"
-
-    def user_interface(self):
-        print("Hi! Recipe Nest helps you use ingridients that you have lying around. Just input your ingridients and I'll find you a recipe!")
-        print("You can filter by cuisine, diet, maximum preperation time and type of meal. If there are ingridients you do not want in your recipes simply put no infront of the ingrident!")
-        print("Ingridients here:")
-        foods = input()
-        print("Cuisine here:")
-        cuisine = input()
-        print("Diet here:")
-        diet = input()
-        print("Max time here:")
-        max_time = input()
-        print("Meal type here:")
-        meal_type = input()
-        self.search_recipes(ingredients=foods, cuisine=cuisine,
-                            diet=diet, time=max_time, mealtype=meal_type)
 
     def search_recipes(self, ingredients, diet, mealtype, time, cuisine):
         i = 1
@@ -68,8 +52,8 @@ class Spoonacular:
         query = Spoonacular.API_URL + response + Spoonacular.API_KEY
         # response = requests.get(query)
         # return response.json()
-        print(query)
-        return query
+        response = requests.get(query)
+        return self.show_output(response.json())
 
     def join_inputs(self, user_inputs):
         if len(user_inputs) == 1:
@@ -91,9 +75,33 @@ class Spoonacular:
         elif usertime["unit"] == "min":
             return int(usertime["amount"])
         elif usertime["unit"] == "h":
-            return int((usertime["amount"] * 60))
+            return int(usertime["amount"] * 60)
 
     # def show_ingredients(self):
+    def show_output(self, json_raw):
+        result = ""
+        json_output = json_raw["results"]
+        time_and_title = json_output[0]
+        result += time_and_title["title"] + "\n"
+        result += "This recipe will take: " + \
+            str(time_and_title["readyInMinutes"]) + " minutes" + "\n"
 
+        result += "Here are the ingredients you will need:" + "\n"
+        missing_ingredients = time_and_title["missedIngredients"]
+        for i in range(0, len(missing_ingredients)):
+            missing_dict = missing_ingredients[i]
+            result += missing_dict["originalString"] + "\n"
 
-# response = requests.get("https://api.spoonacular.com/recipes/complexSearch?includeIngredients=apple,+cheese&type=main&apiKey=40770178730f426c894749c027909c7a")
+        result += "Here are the ingredients you mentioned that you have:" + "\n"
+        have_ingredients = time_and_title["usedIngredients"]
+        for h_i in range(0, len(have_ingredients)):
+            have_dict = have_ingredients[h_i]
+            result += have_dict["originalString"] + "\n"
+
+        result += "And here are the instructions!" + "\n"
+        instructions = time_and_title["analyzedInstructions"][0]["steps"]
+        for i in range(0, len(instructions)):
+            step = instructions[i]
+            result += "Step " + str(i + 1) + ": " + step["step"] + "\n"
+
+        return result

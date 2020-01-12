@@ -1,12 +1,13 @@
 body,
 html {
   height: 100%;
+  background: black;
 }
 
 .chat-container {
   /*margin: 0px;*/
   padding: 0px;
-  width: 500px;
+  width: 600px;
   /*margin: 35px 0px;*/
   margin-left: 15%;
   margin-right: 15%;
@@ -19,21 +20,25 @@ html {
 }
 
 .bot-message {
-  background: #22b538;
-  max-width: 300px;
+  background: #555555;
+  max-width: 500px;
   color: white;
   margin-left: auto;
 }
 
 .human-message {
-  background: dodgerblue;
+  background: linear-gradient(
+    90deg,
+    rgba(197, 4, 247, 1) 0%,
+    rgba(0, 255, 181, 1) 100%
+  );
   max-width: 300px;
   color: white;
   margin: 13px 1px;
 }
 
 .input {
-  width: 500px;
+  width: 600px;
   /*margin: 35px 0px;*/
   margin-left: 15%;
   margin-right: 15%;
