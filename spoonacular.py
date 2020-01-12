@@ -79,7 +79,7 @@ class Spoonacular:
 
     # def show_ingredients(self):
     def show_output(self, json_raw):
-        result = "Here are the recipes, enjoy! \n ================================================================================================ \n"
+        result = "Here are the recipes, enjoy! \n ==================================================================================================== \n"
         json_output = json_raw["results"]
         for j in range(0, len(json_output)):
             time_and_title = json_output[j]
@@ -105,6 +105,6 @@ class Spoonacular:
                 step = instructions[i]
                 result += "Step " + str(i + 1) + ": " + step["step"] + "\n  \n"
 
-            result += "================================================================================================ \n"
+            result += "==================================================================================================== \n"
 
         return result
