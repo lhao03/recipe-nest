@@ -30,7 +30,7 @@ class Spoonacular:
     def search_recipes(self, ingredients, diet, mealtype, time, cuisine):
         i = 1
         while i > 0:
-            # for the ingridients to include
+            # for the ingridients to include - list
             user_ingredients = ingredients
             final_ingre = self.check_inputs(user_ingredients)
             if final_ingre == None:
@@ -38,7 +38,7 @@ class Spoonacular:
             else:
                 response = "includeIngredients=" + final_ingre + "&"
 
-            # for the cuisines to include
+            # for the cuisines to include - list
             user_cuisine = cuisine
             final_cuisine = self.check_inputs(user_cuisine)
             if final_cuisine == None:
@@ -46,53 +46,57 @@ class Spoonacular:
             else:
                 response = response + "cuisine=" + final_cuisine + "&"
 
-            # for the diet
-            user_diet = diet
-            final_diet = self.check_inputs(user_diet)
-            if final_diet == None:
+            # for the diet - string
+            if diet.strip() == "none":
                 pass
             else:
                 response = response + "diet=" + final_diet + "&"
 
-            # for time
-            # user_time = time
-            # if user_time["unit"] == "min":
-            #     final_time = user_time["amount"]
-            # elif user_time["unit"] == "h":
-            #     final_time = user_time * 60
-            final_time = self.check_inputs(user_time)
+            # for time - dict/string
+            final_time = self.check_time(time)
             if final_time == None:
                 pass
             else:
-                response = response + "maxReadyTime=" + final_time + "&"
+                response = response + "maxReadyTime=" + str(final_time) + "&"
 
-            # for meal type
-            user_meal_type = mealtype
-            final_meal_type = self.check_inputs(user_meal_type)
+            # for meal type - string
             i = i - 1
-            if final_meal_type == None:
+            if mealtype.strip() == "none":
                 pass
             else:
                 response = response + "type=" + final_meal_type + "&"
         query = Spoonacular.API_URL + response + Spoonacular.API_KEY
-        print(query)
+        response = requests.get(query)
+        return response.json()
 
-    def join_inputs(self, user_inputs):
-        user_X = user_inputs.split(",")
-        if len(user_X) == 1:
+    def join_inputs(self,user_inputs):
+        if len(user_inputs) == 1:
             return user_inputs
         else:
-            X_get = [("+" + x.strip()) for x in user_X]
-            X_joined = user_X[0] + "," + ",".join(X_get)
+            X_get = [("+" + x.strip()) for x in user_inputs]
+            X_joined = user_inputs[0] + "," + ",".join(X_get)
             return X_joined
 
-    def check_inputs(self, the_input):
-        if the_input.strip() == "none":
+    def check_inputs(self,the_input):
+        if the_input[0].strip() == "none":
             return None
         else:
             return self.join_inputs(the_input)
 
+    def check_time(self,usertime):
+        if usertime == "none" or usertime == "":
+            return None
+        elif usertime["unit"] == "min":
+            return usertime["amount"]
+        elif usertime["unit"] == "h":
+            return (usertime["amount"] * 60)
+
+
+
     # def show_ingredients(self):
 
+a_test = Spoonacular()
+print(a_test.search_recipes(["apple", "cheese"],"none","none","none","none"))
+    
 
 # response = requests.get("https://api.spoonacular.com/recipes/complexSearch?includeIngredients=apple,+cheese&type=main&apiKey=40770178730f426c894749c027909c7a")
