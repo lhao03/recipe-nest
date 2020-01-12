@@ -1,7 +1,31 @@
 body,
 html {
   height: 100%;
-  background: black;
+  background: white;
+  overflow: hidden;
+  color: white;
+  word-wrap: break-word;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Open Sans";
+}
+
+.banner {
+  position: static;
+  width: 100vw;
+  height: 15vh;
+  background-color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  width: 10vw;
 }
 
 .chat-container {
@@ -11,6 +35,7 @@ html {
   /*margin: 35px 0px;*/
   margin-left: 15%;
   margin-right: 15%;
+  overflow-x: hidden;
 }
 
 .chat-message {
