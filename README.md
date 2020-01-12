@@ -1,5 +1,7 @@
 # Recipe Finder - Project for NWHacks 2020
 
+Link to PPT: https://docs.google.com/presentation/d/18IkCE0zR9xVpruWyxMjxytwgpBg7m3-IpwAkUm5MSd0/edit?usp=sharing
+
 ## The Problem
 
 About 1/3 of food produced in the world is lost or wasted in the year. There are many reasons for this, including not being able to cook with said food, not having time to cook this food or cooking food that does not taste good. Albeit this, food waste is a serious problem that wastes money, wastes time and harms the environment.
@@ -23,3 +25,4 @@ We hope to add user logins via Firebase. We would then add features such as 1. S
 ![One example on our slack](static/slack.png)
 
 ![Another example on our web app](static/web2.png)
+
