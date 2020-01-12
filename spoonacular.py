@@ -24,7 +24,7 @@ class Spoonacular:
         meal_type = input()
         self.search_recipes(ingredients=foods,cuisine=cuisine,diet=diet,time=max_time,mealtype=meal_type)
 
-    def search_recipes(self,ingredients,cuisine,diet,time,mealtype):
+    def search_recipes(self,ingredients,diet,mealtype,time,cuisine):
         i = 1
         while i > 0:
             # for the ingridients to include
@@ -52,7 +52,11 @@ class Spoonacular:
                 response= response + "diet=" + final_diet + "&"
 
             # for time
-            user_time = time
+            # user_time = time
+            # if user_time["unit"] == "min":
+            #     final_time = user_time["amount"]
+            # elif user_time["unit"] == "h":
+            #     final_time = user_time * 60
             final_time = self.check_inputs(user_time)
             if final_time == None:
                 pass
