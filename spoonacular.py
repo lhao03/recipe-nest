@@ -3,7 +3,9 @@ import requests
 
 # function for searching for recipes
 # search criteria includes: includeingredients,cuisine,diet,excludeingridients,maxreadytime,type
-class Spoonacular: 
+
+
+class Spoonacular:
     API_URL = "https://api.spoonacular.com/recipes/complexSearch?number=1&instructionsRequired=true&fillIngredients=true&"
     API_KEY = "apiKey=40770178730f426c894749c027909c7a"
     API_URL_IMAGES = "https://api.spoonacular.com/recipes/"
@@ -22,9 +24,10 @@ class Spoonacular:
         max_time = input()
         print("Meal type here:")
         meal_type = input()
-        self.search_recipes(ingredients=foods,cuisine=cuisine,diet=diet,time=max_time,mealtype=meal_type)
+        self.search_recipes(ingredients=foods, cuisine=cuisine,
+                            diet=diet, time=max_time, mealtype=meal_type)
 
-    def search_recipes(self,ingredients,diet,mealtype,time,cuisine):
+    def search_recipes(self, ingredients, diet, mealtype, time, cuisine):
         i = 1
         while i > 0:
             # for the ingridients to include
@@ -40,7 +43,7 @@ class Spoonacular:
             final_cuisine = self.check_inputs(user_cuisine)
             if final_cuisine == None:
                 pass
-            else: 
+            else:
                 response = response + "cuisine=" + final_cuisine + "&"
 
             # for the diet
@@ -49,7 +52,7 @@ class Spoonacular:
             if final_diet == None:
                 pass
             else:
-                response= response + "diet=" + final_diet + "&"
+                response = response + "diet=" + final_diet + "&"
 
             # for time
             # user_time = time
@@ -61,7 +64,7 @@ class Spoonacular:
             if final_time == None:
                 pass
             else:
-                response= response + "maxReadyTime=" + final_time + "&"
+                response = response + "maxReadyTime=" + final_time + "&"
 
             # for meal type
             user_meal_type = mealtype
@@ -74,7 +77,7 @@ class Spoonacular:
         query = Spoonacular.API_URL + response + Spoonacular.API_KEY
         print(query)
 
-    def join_inputs(self,user_inputs):
+    def join_inputs(self, user_inputs):
         user_X = user_inputs.split(",")
         if len(user_X) == 1:
             return user_inputs
@@ -83,18 +86,13 @@ class Spoonacular:
             X_joined = user_X[0] + "," + ",".join(X_get)
             return X_joined
 
-    def check_inputs(self,the_input):
+    def check_inputs(self, the_input):
         if the_input.strip() == "none":
             return None
-        else: 
+        else:
             return self.join_inputs(the_input)
 
-
     # def show_ingredients(self):
-
-a_test = Spoonacular()
-a_test.user_interface()
-    
 
 
 # response = requests.get("https://api.spoonacular.com/recipes/complexSearch?includeIngredients=apple,+cheese&type=main&apiKey=40770178730f426c894749c027909c7a")
