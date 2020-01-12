@@ -89,9 +89,9 @@ class Spoonacular:
         if usertime == "none" or usertime == "":
             return None
         elif usertime["unit"] == "min":
-            return usertime["amount"]
+            return int(usertime["amount"])
         elif usertime["unit"] == "h":
-            return (usertime["amount"] * 60)
+            return int((usertime["amount"] * 60))
 
     # def show_ingredients(self):
 

@@ -22,7 +22,7 @@ def webhook():
     user = Spoonacular()
     allParameters = data['queryResult']['parameters']
     result = user.search_recipes(allParameters["IncludeIngredients"], allParameters["DietType"],
-                                 allParameters["MealType"], allParameters["duration1"], allParameters["MealType"])
+                                 allParameters["MealType"], allParameters["duration1"], allParameters["Cuisine"])
     reply = {
         "fulfillmentText": result,
     }
