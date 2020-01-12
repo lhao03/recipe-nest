@@ -50,7 +50,7 @@ class Spoonacular:
             if diet.strip() == "none":
                 pass
             else:
-                response = response + "diet=" + final_diet + "&"
+                response = response + "diet=" + diet.strip() + "&"
 
             # for time - dict/string
             final_time = self.check_time(time)
@@ -64,26 +64,28 @@ class Spoonacular:
             if mealtype.strip() == "none":
                 pass
             else:
-                response = response + "type=" + final_meal_type + "&"
+                response = response + "type=" + mealtype.strip() + "&"
         query = Spoonacular.API_URL + response + Spoonacular.API_KEY
-        response = requests.get(query)
-        return response.json()
+        # response = requests.get(query)
+        # return response.json()
+        print(query)
+        return query
 
-    def join_inputs(self,user_inputs):
+    def join_inputs(self, user_inputs):
         if len(user_inputs) == 1:
-            return user_inputs
+            return user_inputs[0]
         else:
             X_get = [("+" + x.strip()) for x in user_inputs]
             X_joined = user_inputs[0] + "," + ",".join(X_get)
             return X_joined
 
-    def check_inputs(self,the_input):
+    def check_inputs(self, the_input):
         if the_input[0].strip() == "none":
             return None
         else:
             return self.join_inputs(the_input)
 
-    def check_time(self,usertime):
+    def check_time(self, usertime):
         if usertime == "none" or usertime == "":
             return None
         elif usertime["unit"] == "min":
@@ -91,12 +93,7 @@ class Spoonacular:
         elif usertime["unit"] == "h":
             return (usertime["amount"] * 60)
 
-
-
     # def show_ingredients(self):
 
-a_test = Spoonacular()
-print(a_test.search_recipes(["apple", "cheese"],"none","none","none","none"))
-    
 
 # response = requests.get("https://api.spoonacular.com/recipes/complexSearch?includeIngredients=apple,+cheese&type=main&apiKey=40770178730f426c894749c027909c7a")

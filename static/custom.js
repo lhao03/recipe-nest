@@ -11,6 +11,9 @@ function submit_message(message) {
     // remove the loading indicator
     $("#loading").remove();
   }
+
+  var element = document.getElementById("chat-container");
+  element.scrollTop = element.scrollHeight;
 }
 
 $("#target").on("submit", function(e) {
