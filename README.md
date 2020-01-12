@@ -1,9 +1,8 @@
-# Recipe Finder
-## Project for NWHacks 2020
+# Recipe Finder - Project for NWHacks 2020
 
-### The Problem
+## The Problem
 
-### Our Solution 
+## Our Solution 
 
-### How we did it
+## How we did it
 
