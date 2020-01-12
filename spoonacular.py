@@ -6,8 +6,8 @@ import requests
 
 
 class Spoonacular:
-    API_URL = "https://api.spoonacular.com/recipes/complexSearch?number=1&instructionsRequired=true&fillIngredients=true&addRecipeInformation=true&"
-    API_KEY = "apiKey=40770178730f426c894749c027909c7a"
+    API_URL = "https://api.spoonacular.com/recipes/complexSearch?number=5&instructionsRequired=true&fillIngredients=true&addRecipeInformation=true&"
+    API_KEY = "apiKey=0dea0ed6c1ec4063ae2e452decb07fb8"
     API_URL_IMAGES = "https://api.spoonacular.com/recipes/"
     IMAGE_CONT = "/ingredientWidget"
 
@@ -79,29 +79,32 @@ class Spoonacular:
 
     # def show_ingredients(self):
     def show_output(self, json_raw):
-        result = ""
+        result = "Here are the recipes, enjoy! \n ================================================================================================ \n"
         json_output = json_raw["results"]
-        time_and_title = json_output[0]
-        result += time_and_title["title"] + "\n"
-        result += "This recipe will take: " + \
-            str(time_and_title["readyInMinutes"]) + " minutes" + "\n"
+        for j in range(0, len(json_output)):
+            time_and_title = json_output[j]
+            result += time_and_title["title"] + "\n  \n"
+            result += "This recipe will take: " + \
+                str(time_and_title["readyInMinutes"]) + " minutes" + "\n  \n"
 
-        result += "Here are the ingredients you will need:" + "\n"
-        missing_ingredients = time_and_title["missedIngredients"]
-        for i in range(0, len(missing_ingredients)):
-            missing_dict = missing_ingredients[i]
-            result += missing_dict["originalString"] + "\n"
+            result += "Here are the ingredients you will need:" + "\n  \n"
+            missing_ingredients = time_and_title["missedIngredients"]
+            for i in range(0, len(missing_ingredients)):
+                missing_dict = missing_ingredients[i]
+                result += missing_dict["originalString"] + "\n  \n"
 
-        result += "Here are the ingredients you mentioned that you have:" + "\n"
-        have_ingredients = time_and_title["usedIngredients"]
-        for h_i in range(0, len(have_ingredients)):
-            have_dict = have_ingredients[h_i]
-            result += have_dict["originalString"] + "\n"
+            result += "Here are the ingredients you mentioned that you have:" + "\n  \n"
+            have_ingredients = time_and_title["usedIngredients"]
+            for h_i in range(0, len(have_ingredients)):
+                have_dict = have_ingredients[h_i]
+                result += have_dict["originalString"] + "\n  \n"
 
-        result += "And here are the instructions!" + "\n"
-        instructions = time_and_title["analyzedInstructions"][0]["steps"]
-        for i in range(0, len(instructions)):
-            step = instructions[i]
-            result += "Step " + str(i + 1) + ": " + step["step"] + "\n"
+            result += "And here are the instructions!" + "\n  \n"
+            instructions = time_and_title["analyzedInstructions"][0]["steps"]
+            for i in range(0, len(instructions)):
+                step = instructions[i]
+                result += "Step " + str(i + 1) + ": " + step["step"] + "\n  \n"
+
+            result += "================================================================================================ \n"
 
         return result
