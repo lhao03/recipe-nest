@@ -51,7 +51,7 @@ class Spoonacular:
             else:
                 response= response + "diet=" + final_diet + "&"
 
-            # for time 
+            # for time
             user_time = time
             final_time = self.check_inputs(user_time)
             if final_time == None:
