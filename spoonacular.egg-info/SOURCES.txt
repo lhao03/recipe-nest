@@ -1,7 +1,0 @@
-README.md
-setup.py
-spoonacular.egg-info/PKG-INFO
-spoonacular.egg-info/SOURCES.txt
-spoonacular.egg-info/dependency_links.txt
-spoonacular.egg-info/requires.txt
-spoonacular.egg-info/top_level.txt
